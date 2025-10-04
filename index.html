@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arpit Pandey - Portfolio</title>
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Dark Mode and Sidebar Toggles -->
+    <input type="checkbox" id="dark-mode-toggle" class="toggle-checkbox">
+    <input type="checkbox" id="sidebar-toggle" class="sidebar-toggle-checkbox">
+
+    <!-- Floating Social Media Icons -->
+    <div class="floating-social">
+        <a href="https://youtube.com" target="_blank" class="tooltip-left" data-tip="YouTube">
+            <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" class="tooltip-left" data-tip="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://t.me/+PK-YXb7NQtNiNDU1" target="_blank" class="tooltip-left" data-tip="Telegram">
+            <i class="fab fa-telegram"></i>
+        </a>
+        <a href="https://twitter.com" target="_blank" class="tooltip-left" data-tip="Twitter">
+            <i class="fab fa-twitter"></i>
+        </a>
+        <a href="" target="_blank" class="tooltip-left" data-tip="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/apandey-9046" target="_blank" class="tooltip-left" data-tip="GitHub">
+            <i class="fab fa-github"></i>
+        </a>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="main-container">
+        <!-- Mobile Navigation Toggle -->
+        <label for="sidebar-toggle" class="mobile-toggle-btn">
+            <i class="fas fa-bars"></i>
+        </label>
+
+        <!-- Sidebar Navigation -->
+        <aside class="side-bar">
+            <!-- Dark Mode Toggle -->
+            <div class="dark-mode-toggle-top">
+                <label for="dark-mode-toggle" class="mode-toggle-btn" title="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                </label>
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="nav-list">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#resume">Resume</a></li>
+                    <li><a href="#certificates">Certificates</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- User Information -->
+            <div class="user-info">
+                <p>Arpit Pandey</p>
+                <img src="./assets/avatar-sidebar.png" alt="Arpit Pandey" id="img-icon">
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="content-area">
+            <!-- Home Section -->
+            <section id="home" class="page-section">
+                <div class="hero-section">
+                    <div class="home-content">
+                        <div class="profile-image-container">
+                            <img src="./assets/home.png" alt="Arpit Pandey" id="profile-img">
+                        </div>
+                        <div class="home-text">
+                            <h1>Hello, I'm <span class="highlight">Arpit Pandey</span></h1>
+                            <p class="subtitle">Full Stack Developer & Designer</p>
+                            <p class="description">
+                                I create beautiful, functional websites and applications using modern technologies. Passionate about clean code, user experience, and problem-solving.
+                            </p>
+                            <div class="cta-buttons">
+                                <a href="#projects" class="btn-primary">View My Work</a>
+                                <a href="#contact" class="btn-secondary">Get In Touch</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="page-section">
+                <div class="about-wrapper">
+                    <h2 class="section-title">About Me 🧑‍💻</h2>
+                    <div class="about-content">
+                        <div class="about-image">
+                            <img src="./assets/avatar-home.png" alt="About Me">
+                        </div>
+                        <div class="about-text">
+                            <h3>Who Am I?</h3>
+                            <p>
+                                I'm a passionate Full Stack Developer with 3+ years of experience building scalable web applications. I love turning complex problems into simple, beautiful, and intuitive designs.
+                            </p>
+                            <h3>What I Do</h3>
+                            <ul class="skills-list">
+                                <li>Frontend: HTML, CSS, JavaScript, React</li>
+                                <li>Backend: Node.js, Express, Python, Django</li>
+                                <li>Database: MongoDB, PostgreSQL, Firebase</li>
+                                <li>DevOps: Docker, AWS, CI/CD</li>
+                                <li>UI/UX Design: Figma, Adobe XD</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="page-section">
+                <div class="projects-wrapper">
+                    <h2 class="section-title">My Projects 🚀</h2>
+                    <div class="projects-grid">
+                        <!-- Project 1: E-Commerce Platform -->
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="https://via.placeholder.com/300x200/4A90E2/FFFFFF?text=E-Commerce+App" alt="E-Commerce Platform">
+                            </div>
+                            <div class="project-info">
+                                <h3>Expense And Income Manager</h3>
+                                <p>A Simple Expense Maanger WebApp To Make Day To Day Expense Recording Easy.</p>
+                                <div class="project-tech">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://arpitpandey21.github.io/Expense_Income_Manager/" class="btn-secondary">View Demo</a>
+                                    <a href="#" class="btn-primary">Source Code</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Project 2: Task Manager -->
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="https://via.placeholder.com/300x200/50E3C2/FFFFFF?text=Task+Manager" alt="Task Manager">
+                            </div>
+                            <div class="project-info">
+                                <h3>Task Manager</h3>
+                                <p>Simple App For Adding ANd MAnageing Day To Day Task In A Attaractive Way So That Users Dont Get Bored</p>
+                                <div class="project-tech">
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://arpitpandey21.github.io/Task_manager/" class="btn-secondary">View Demo</a>
+                                    <a href="#" class="btn-primary">Source Code</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Project 3: Weather Forecast -->
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="https://via.placeholder.com/300x200/F5A623/FFFFFF?text=Weather+App" alt="Weather Forecast">
+                            </div>
+                            <div class="project-info">
+                                <h3>Weather Forecast</h3>
+                                <p>Beautiful weather app with 7-day forecast and location-based services.</p>
+                                <div class="project-tech">
+                                    <span>JavaScript</span>
+                                    <span>API</span>
+                                    <span>CSS3</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" class="btn-secondary">View Demo</a>
+                                    <a href="#" class="btn-primary">Source Code</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resume Section -->
+            <section id="resume" class="page-section">
+                <div class="resume-wrapper">
+                    <h2 class="section-title">My Resume 📄</h2>
+                    <div class="custom-resume">
+                        <!-- Resume Header -->
+                        <div class="resume-header">
+                            <div class="resume-avatar">
+                                <img src="./assets/avatar-resume.png" alt="Arpit Pandey">
+                            </div>
+                            <div class="resume-title">
+                                <h1>Arpit Pandey</h1>
+                                <h3>Full Stack Developer</h3>
+                                <p>Creating beautiful digital experiences with clean code</p>
+                            </div>
+                        </div>
+                        <!-- Resume Download Button -->
+                        <div class="resume-download-btn">
+                            <a href="./assets/arpit_pandey_resume.pdf" download="Arpit_Pandey_Resume.pdf" class="btn-primary">Download PDF</a>
+                        </div>
+                        <!-- Technical Skills -->
+                        <div class="resume-section">
+                            <h3><i class="fas fa-code"></i> Technical Skills</h3>
+                            <div class="skills-grid">
+                                <div class="skill-item">
+                                    <h4>Frontend</h4>
+                                    <p>HTML5, CSS3, JavaScript</p>
+                                </div>
+                                <div class="skill-item">
+                                    <h4>Backend</h4>
+                                    <p>Node.js, Express, Python, Django</p>
+                                </div>
+                                <div class="skill-item">
+                                    <h4>Database</h4>
+                                    <p>MongoDB, Basic SQL</p>
+                                </div>
+                                <!-- <div class="skill-item">
+                                    <h4>DevOps</h4>
+                                    <p>Docker, AWS, CI/CD, Git</p>
+                                </div> -->
+                            </div>
+                        </div>
+                        <!-- Work Experience -->
+                        <div class="resume-section">
+                            <h3><i class="fas fa-briefcase"></i> Experience</h3>
+                            <div class="experience-item">
+                                <div class="experience-header">
+                                    <h4>Software Development Intern</h4>
+                                    <span class="company">Tech Solutions Inc.</span>
+                                    <span class="duration">Jun 2024 - Aug 2024</span>
+                                </div>
+                                <ul class="experience-details">
+                                    <li>Developed and maintained web applications using React and Node.js</li>
+                                    <li>Collaborated with cross-functional teams to deliver features on time</li>
+                                    <li>Improved application performance by 30% through code optimization</li>
+                                </ul>
+                            </div>
+                            <div class="experience-item">
+                                <div class="experience-header">
+                                    <h4>Frontend Development Intern</h4>
+                                    <span class="company">Digital Creators Studio</span>
+                                    <span class="duration">Jan 2024 - Mar 2024</span>
+                                </div>
+                                <ul class="experience-details">
+                                    <li>Created responsive UI components using React and Tailwind CSS</li>
+                                    <li>Implemented user authentication and authorization systems</li>
+                                    <li>Participated in code reviews and implemented feedback</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Key Projects -->
+                        <div class="resume-section">
+                            <h3><i class="fas fa-project-diagram"></i> Key Projects</h3>
+                            <div class="project-item">
+                                <h4>E-Commerce Platform</h4>
+                                <p>Full stack e-commerce application with payment integration, admin dashboard, and user management system.</p>
+                                <div class="project-tech">
+                                    <span>React</span>
+                                    <span>Node.js</span>
+                                    <span>MongoDB</span>
+                                    <span>Stripe API</span>
+                                </div>
+                            </div>
+                            <div class="project-item">
+                                <h4>Task Management System</h4>
+                                <p>Real-time collaborative task manager with drag-and-drop interface and team management features.</p>
+                                <div class="project-tech">
+                                    <span>Vue.js</span>
+                                    <span>Firebase</span>
+                                    <span>Tailwind CSS</span>
+                                    <span>Socket.io</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Education -->
+                        <div class="resume-section">
+                            <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+                            <div class="education-item">
+                                <h4>Bachelors Of Computer Applications</h4>
+                                <span class="institution">Maharishi Dayanand University</span>
+                                <span class="duration">2023 - 2026</span>
+                                <p>CGPA: 8.7/10</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Certificates Section -->
+            <section id="certificates" class="page-section">
+                <div class="certificates-wrapper">
+                    <h2 class="section-title">My Certificates 🏅</h2>
+                    <p class="section-subtitle">Validated skills from top industry leaders</p>
+                    <div class="certificates-grid">
+                        <!-- Certificate 1: HTML COURSE CETIFICATE -->
+                        <div class="certificate-card">
+                            <div class="cert-front">
+                                <img src="./certificates/HTML Certificate.jpg" alt="html_certificate">
+                                <div class="cert-overlay">
+                                    <span class="cert-tag">☁️ Cloud</span>
+                                </div>
+                            </div>
+                            <div class="cert-back">
+                                <h3>HTML Certificate</h3>
+                                <p class="cert-issuer">Issued by: KG Coding Classes</p>
+                                <p class="cert-date">Issued: September 2025</p>
+                                <a href="https://www.knowledgegate.ai/certificate/4E8F4714" class="btn-secondary">Verify Credential</a>
+                            </div>
+                        </div>
+
+
+                        <!-- Certificate 2: React and Redux Certificate -->
+                        <div class="certificate-card">
+                            <div class="cert-front">
+                                <img src="./certificates/React and Redux.jpg" alt="react and redux ">
+                                <div class="cert-overlay">
+                                    <span class="cert-tag"> ⚛️ Front End</span>
+                                </div>
+                            </div>
+                            <div class="cert-back">
+                                <h3>Advanced React & Redux</h3>
+                                <p class="cert-issuer">Issued by: KG Coding Classes </p>
+                                <p class="cert-date">Issued: Sepember 2025</p>
+                                <a href="https://www.knowledgegate.ai/certificate/25C863BC" class="btn-secondary">Verify Credential</a>
+                            </div>
+                        </div>
+                        <!-- Certificate 3: Complete Css -->
+                        <div class="certificate-card">
+                            <div class="cert-front">
+                                <img src="./certificates/Complete CSS.jpg" alt="css complete">
+                                <div class="cert-overlay">
+                                    <span class="cert-tag">⚛️ Frontend</span>
+                                </div>
+                            </div>
+                            <div class="cert-back">
+                                <h3>Complete CSS</h3>
+                                <p class="cert-issuer">Issued by: KG Coding Classes</p>
+                                <p class="cert-date">Issued: September 2025</p>
+                                <a href="#" class="btn-secondary">Verify Credential</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="page-section">
+                <div class="contact-wrapper">
+                    <h2 class="section-title">Get In Touch ✉️</h2>
+                    <div class="contact-layout">
+                        <div class="contact-img-container">
+                            <img src="./assets/avatar-contact.png" alt="Contact Illustration" id="contact-img">
+                        </div>
+                        <div class="contact-form-container">
+                            <form class="contact-form">
+                                <input type="text" placeholder="Your Name" required>
+                                <input type="email" placeholder="Your Email" required>
+                                <textarea placeholder="Your Message" rows="5" required style="resize: none;"></textarea>
+                                <button type="submit" class="submit-btn">Send Message 📬</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Default Section -->
+            <section id="default" class="page-section default-section">
+                <div class="default-content">
+                    <h2>Welcome to My Portfolio</h2>
+                    <p>Please select a section from the sidebar to get started.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Initialize page functionality on DOM load
+        document.addEventListener('DOMContentLoaded', function() {});
+    </script>
+</body>
+
+</html>
