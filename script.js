@@ -18,12 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Set up smooth scrolling
     setupSmoothScrolling();
-
-    // Set up intersection observer for animations
-    setupAnimations();
-
-    // Set up resume animations
-    setupResumeAnimations();
 });
 
 // Initialize page state
@@ -40,8 +34,10 @@ function initializePage() {
     // Set initial dark mode state from localStorage
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const isDarkMode = localStorage.getItem('darkMode') === 'true';
-    darkModeToggle.checked = isDarkMode;
-    updateDarkMode(isDarkMode);
+    if (darkModeToggle) {
+        darkModeToggle.checked = isDarkMode;
+        updateDarkMode(isDarkMode);
+    }
 }
 
 // Set up navigation functionality
@@ -59,11 +55,7 @@ function setupNavigation() {
             history.pushState(null, null, `#${targetId}`);
 
             // Close mobile sidebar if open
-            const sidebarToggle = document.getElementById('sidebar-toggle');
-            if (sidebarToggle && sidebarToggle.checked) {
-                sidebarToggle.checked = false;
-                document.body.classList.remove('sidebar-open');
-            }
+            closeMobileSidebar();
         });
     });
 
@@ -215,114 +207,49 @@ function setupContactForm() {
     }
 }
 
-// Set up mobile sidebar toggle - FIXED VERSION
+// Mobile sidebar functionality - SIMPLE VERSION
 function setupMobileToggle() {
-    const sidebarToggle = document.getElementById('sidebar-toggle');
     const mobileToggleBtn = document.querySelector('.mobile-toggle-btn');
-    const sidebarCloseBtn = document.querySelector('.sidebar-close-btn');
     const navLinks = document.querySelectorAll('.nav-link');
+    const overlay = document.querySelector('.sidebar-overlay');
 
     // Mobile toggle button click
     if (mobileToggleBtn) {
         mobileToggleBtn.addEventListener('click', function (e) {
             e.stopPropagation();
-            if (sidebarToggle) {
-                sidebarToggle.checked = !sidebarToggle.checked;
-                document.body.classList.toggle('sidebar-open', sidebarToggle.checked);
-            }
+            document.body.classList.toggle('sidebar-open');
         });
     }
 
-    // Close button click
-    if (sidebarCloseBtn) {
-        sidebarCloseBtn.addEventListener('click', function () {
-            if (sidebarToggle) {
-                sidebarToggle.checked = false;
-                document.body.classList.remove('sidebar-open');
-            }
-        });
-    }
-
-    // Close sidebar when nav link is clicked (mobile)
+    // Close sidebar when nav link is clicked
     navLinks.forEach(link => {
         link.addEventListener('click', function () {
-            if (window.innerWidth <= 1024 && sidebarToggle && sidebarToggle.checked) {
-                sidebarToggle.checked = false;
-                document.body.classList.remove('sidebar-open');
-            }
+            closeMobileSidebar();
         });
     });
 
-    // Close sidebar when clicking outside on mobile
-    document.addEventListener('click', function (e) {
-        if (sidebarToggle &&
-            sidebarToggle.checked &&
-            window.innerWidth <= 1024 &&
-            !e.target.closest('.side-bar') &&
-            !e.target.closest('.mobile-toggle-btn')) {
-            sidebarToggle.checked = false;
-            document.body.classList.remove('sidebar-open');
-        }
-    });
+    // Close sidebar when clicking on overlay
+    if (overlay) {
+        overlay.addEventListener('click', function () {
+            closeMobileSidebar();
+        });
+    }
 
     // Close sidebar when pressing Escape key
     document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && sidebarToggle && sidebarToggle.checked) {
-            sidebarToggle.checked = false;
-            document.body.classList.remove('sidebar-open');
+        if (e.key === 'Escape') {
+            closeMobileSidebar();
         }
     });
+}
 
-    // Close sidebar on window resize if it becomes desktop view
-    window.addEventListener('resize', function () {
-        if (window.innerWidth > 1024 && sidebarToggle && sidebarToggle.checked) {
-            sidebarToggle.checked = false;
-            document.body.classList.remove('sidebar-open');
-        }
-    });
-
-    // Add overlay for mobile sidebar
-    const overlay = document.createElement('div');
-    overlay.className = 'sidebar-overlay';
-    overlay.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-    `;
-
-    overlay.addEventListener('click', function () {
-        if (sidebarToggle) {
-            sidebarToggle.checked = false;
-            document.body.classList.remove('sidebar-open');
-        }
-    });
-
-    document.body.appendChild(overlay);
-
-    // Update overlay based on sidebar state
-    if (sidebarToggle) {
-        sidebarToggle.addEventListener('change', function () {
-            if (this.checked) {
-                overlay.style.opacity = '1';
-                overlay.style.visibility = 'visible';
-            } else {
-                overlay.style.opacity = '0';
-                overlay.style.visibility = 'hidden';
-            }
-        });
-    }
+// Close mobile sidebar
+function closeMobileSidebar() {
+    document.body.classList.remove('sidebar-open');
 }
 
 // Set up smooth scrolling for anchor links
 function setupSmoothScrolling() {
-    // This is handled by the navigation setup, but we can add additional smooth scrolling if needed
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
@@ -350,211 +277,3 @@ function setupSmoothScrolling() {
         });
     });
 }
-
-// Set up animations for elements when they come into view
-function setupAnimations() {
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver(function (entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
-            }
-        });
-    }, observerOptions);
-
-    // Observe elements that should animate in
-    const animateElements = document.querySelectorAll('.project-card, .certificate-card, .skill-item');
-    animateElements.forEach(el => {
-        observer.observe(el);
-    });
-}
-
-// Set up resume-specific animations
-function setupResumeAnimations() {
-    const resumeObserverOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
-    const resumeObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                if (entry.target.classList.contains('timeline-item')) {
-                    entry.target.style.animation = 'slideInLeft 0.6s ease forwards';
-                    entry.target.style.opacity = '0';
-                    entry.target.style.transform = 'translateX(-30px)';
-
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateX(0)';
-                    }, 100);
-                }
-
-                if (entry.target.classList.contains('skill-category')) {
-                    entry.target.style.animation = 'slideInRight 0.6s ease forwards';
-                    entry.target.style.opacity = '0';
-                    entry.target.style.transform = 'translateX(30px)';
-
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateX(0)';
-                    }, 100);
-                }
-
-                if (entry.target.classList.contains('project-highlight')) {
-                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
-                    entry.target.style.opacity = '0';
-                    entry.target.style.transform = 'translateY(30px)';
-
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }, 100);
-                }
-            }
-        });
-    }, resumeObserverOptions);
-
-    // Observe resume elements
-    const resumeElements = document.querySelectorAll('.timeline-item, .skill-category, .project-highlight, .achievement-item');
-    resumeElements.forEach(el => {
-        resumeObserver.observe(el);
-    });
-}
-
-// Add some utility functions
-function debounce(func, wait, immediate) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            timeout = null;
-            if (!immediate) func(...args);
-        };
-        const callNow = immediate && !timeout;
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-        if (callNow) func(...args);
-    };
-}
-
-// Handle window resize with debounce
-window.addEventListener('resize', debounce(function () {
-    // Adjust layout if needed on resize
-}, 250));
-
-// Add loading state for images
-document.addEventListener('DOMContentLoaded', function () {
-    const images = document.querySelectorAll('img');
-
-    images.forEach(img => {
-        // Add loading class
-        img.classList.add('loading');
-
-        // Remove loading class when image is loaded
-        if (img.complete) {
-            img.classList.remove('loading');
-        } else {
-            img.addEventListener('load', function () {
-                this.classList.remove('loading');
-            });
-
-            img.addEventListener('error', function () {
-                // Handle broken images
-                this.classList.remove('loading');
-                this.classList.add('image-error');
-            });
-        }
-    });
-});
-
-// Add CSS animations for resume and mobile sidebar
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideInLeft {
-        from {
-            opacity: 0;
-            transform: translateX(-30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    
-    @keyframes slideInRight {
-        from {
-            opacity: 0;
-            transform: translateX(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    .timeline-item,
-    .skill-category,
-    .project-highlight,
-    .achievement-item {
-        opacity: 0;
-    }
-    
-    /* Form Loading State */
-    .submit-btn:disabled {
-        opacity: 0.7;
-        cursor: not-allowed;
-    }
-    
-    .submit-btn.loading {
-        position: relative;
-        color: transparent;
-    }
-    
-    .submit-btn.loading::after {
-        content: '';
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        top: 50%;
-        left: 50%;
-        margin-left: -10px;
-        margin-top: -10px;
-        border: 2px solid #ffffff;
-        border-radius: 50%;
-        border-top-color: transparent;
-        animation: spin 1s ease-in-out infinite;
-    }
-    
-    @keyframes spin {
-        to { transform: rotate(360deg); }
-    }
-
-    /* Mobile Sidebar Animation */
-    @media (max-width: 1024px) {
-        .side-bar {
-            transition: left 0.4s ease;
-        }
-        
-        body.sidebar-open {
-            overflow: hidden;
-        }
-    }
-`;
-document.head.appendChild(style);
