@@ -18,6 +18,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Set up smooth scrolling
     setupSmoothScrolling();
+<<<<<<< HEAD
+=======
+
+    // Set up intersection observer for animations
+    setupAnimations();
+
+    // Set up resume animations
+    setupResumeAnimations();
+>>>>>>> fac400cf518c7483098e2397a36c9d9bc5a72311
 });
 
 // Initialize page state
@@ -34,10 +43,15 @@ function initializePage() {
     // Set initial dark mode state from localStorage
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const isDarkMode = localStorage.getItem('darkMode') === 'true';
+<<<<<<< HEAD
     if (darkModeToggle) {
         darkModeToggle.checked = isDarkMode;
         updateDarkMode(isDarkMode);
     }
+=======
+    darkModeToggle.checked = isDarkMode;
+    updateDarkMode(isDarkMode);
+>>>>>>> fac400cf518c7483098e2397a36c9d9bc5a72311
 }
 
 // Set up navigation functionality
@@ -55,7 +69,14 @@ function setupNavigation() {
             history.pushState(null, null, `#${targetId}`);
 
             // Close mobile sidebar if open
+<<<<<<< HEAD
             closeMobileSidebar();
+=======
+            const sidebarToggle = document.getElementById('sidebar-toggle');
+            if (sidebarToggle.checked) {
+                sidebarToggle.checked = false;
+            }
+>>>>>>> fac400cf518c7483098e2397a36c9d9bc5a72311
         });
     });
 
@@ -99,6 +120,7 @@ function activateSection(sectionId) {
 function setupDarkMode() {
     const darkModeToggle = document.getElementById('dark-mode-toggle');
 
+<<<<<<< HEAD
     if (darkModeToggle) {
         darkModeToggle.addEventListener('change', function () {
             const isDarkMode = this.checked;
@@ -106,6 +128,13 @@ function setupDarkMode() {
             localStorage.setItem('darkMode', isDarkMode);
         });
     }
+=======
+    darkModeToggle.addEventListener('change', function () {
+        const isDarkMode = this.checked;
+        updateDarkMode(isDarkMode);
+        localStorage.setItem('darkMode', isDarkMode);
+    });
+>>>>>>> fac400cf518c7483098e2397a36c9d9bc5a72311
 }
 
 // Update dark mode state
@@ -207,6 +236,7 @@ function setupContactForm() {
     }
 }
 
+<<<<<<< HEAD
 // Mobile sidebar functionality - SIMPLE VERSION
 function setupMobileToggle() {
     const mobileToggleBtn = document.querySelector('.mobile-toggle-btn');
@@ -239,10 +269,31 @@ function setupMobileToggle() {
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
             closeMobileSidebar();
+=======
+// Set up mobile sidebar toggle
+function setupMobileToggle() {
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const mobileToggleBtn = document.querySelector('.mobile-toggle-btn');
+
+    // Close sidebar when clicking outside on mobile
+    document.addEventListener('click', function (e) {
+        if (sidebarToggle.checked &&
+            !e.target.closest('.side-bar') &&
+            !e.target.closest('.mobile-toggle-btn')) {
+            sidebarToggle.checked = false;
+        }
+    });
+
+    // Close sidebar when pressing Escape key
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && sidebarToggle.checked) {
+            sidebarToggle.checked = false;
+>>>>>>> fac400cf518c7483098e2397a36c9d9bc5a72311
         }
     });
 }
 
+<<<<<<< HEAD
 // Close mobile sidebar
 function closeMobileSidebar() {
     document.body.classList.remove('sidebar-open');
@@ -250,6 +301,11 @@ function closeMobileSidebar() {
 
 // Set up smooth scrolling for anchor links
 function setupSmoothScrolling() {
+=======
+// Set up smooth scrolling for anchor links
+function setupSmoothScrolling() {
+    // This is handled by the navigation setup, but we can add additional smooth scrolling if needed
+>>>>>>> fac400cf518c7483098e2397a36c9d9bc5a72311
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
@@ -276,4 +332,205 @@ function setupSmoothScrolling() {
             }
         });
     });
+<<<<<<< HEAD
 }
+=======
+}
+
+// Set up animations for elements when they come into view
+function setupAnimations() {
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements that should animate in
+    const animateElements = document.querySelectorAll('.project-card, .certificate-card, .skill-item');
+    animateElements.forEach(el => {
+        observer.observe(el);
+    });
+}
+
+// Set up resume-specific animations
+function setupResumeAnimations() {
+    const resumeObserverOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const resumeObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                if (entry.target.classList.contains('timeline-item')) {
+                    entry.target.style.animation = 'slideInLeft 0.6s ease forwards';
+                    entry.target.style.opacity = '0';
+                    entry.target.style.transform = 'translateX(-30px)';
+
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }, 100);
+                }
+
+                if (entry.target.classList.contains('skill-category')) {
+                    entry.target.style.animation = 'slideInRight 0.6s ease forwards';
+                    entry.target.style.opacity = '0';
+                    entry.target.style.transform = 'translateX(30px)';
+
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }, 100);
+                }
+
+                if (entry.target.classList.contains('project-highlight')) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                    entry.target.style.opacity = '0';
+                    entry.target.style.transform = 'translateY(30px)';
+
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, 100);
+                }
+            }
+        });
+    }, resumeObserverOptions);
+
+    // Observe resume elements
+    const resumeElements = document.querySelectorAll('.timeline-item, .skill-category, .project-highlight, .achievement-item');
+    resumeElements.forEach(el => {
+        resumeObserver.observe(el);
+    });
+}
+
+// Add some utility functions
+function debounce(func, wait, immediate) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            timeout = null;
+            if (!immediate) func(...args);
+        };
+        const callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func(...args);
+    };
+}
+
+// Handle window resize with debounce
+window.addEventListener('resize', debounce(function () {
+    // Adjust layout if needed on resize
+}, 250));
+
+// Add loading state for images
+document.addEventListener('DOMContentLoaded', function () {
+    const images = document.querySelectorAll('img');
+
+    images.forEach(img => {
+        // Add loading class
+        img.classList.add('loading');
+
+        // Remove loading class when image is loaded
+        if (img.complete) {
+            img.classList.remove('loading');
+        } else {
+            img.addEventListener('load', function () {
+                this.classList.remove('loading');
+            });
+
+            img.addEventListener('error', function () {
+                // Handle broken images
+                this.classList.remove('loading');
+                this.classList.add('image-error');
+            });
+        }
+    });
+});
+
+// Add CSS animations for resume
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    @keyframes slideInRight {
+        from {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .timeline-item,
+    .skill-category,
+    .project-highlight,
+    .achievement-item {
+        opacity: 0;
+    }
+    
+    /* Form Loading State */
+    .submit-btn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+    
+    .submit-btn.loading {
+        position: relative;
+        color: transparent;
+    }
+    
+    .submit-btn.loading::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        top: 50%;
+        left: 50%;
+        margin-left: -10px;
+        margin-top: -10px;
+        border: 2px solid #ffffff;
+        border-radius: 50%;
+        border-top-color: transparent;
+        animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+`;
+document.head.appendChild(style);
+>>>>>>> fac400cf518c7483098e2397a36c9d9bc5a72311
