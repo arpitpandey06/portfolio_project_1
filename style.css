@@ -30,9 +30,7 @@
 }
 
 /* Dark Mode Colors */
-body.dark-mode,
-body.dark-mode .main-container,
-body.dark-mode .main-container * {
+body.dark-mode {
     --bg-main: #161a2e;
     --bg-sidebar: linear-gradient(90deg, #0d1117, #161b22, #0d1117);
     --text-color: #e6e6e6;
@@ -242,7 +240,7 @@ body.dark-mode .mode-toggle-btn .fas.fa-sun {
     opacity: 1;
 }
 
-/* Mobile Sidebar Styles */
+/* MOBILE SIDEBAR STYLES - FIXED */
 @media (max-width: 1024px) {
     .side-bar {
         position: fixed;
@@ -254,7 +252,9 @@ body.dark-mode .mode-toggle-btn .fas.fa-sun {
         transition: left 0.4s ease;
     }
 
-    .sidebar-toggle-checkbox:checked ~ .main-container .side-bar {
+    /* This is the key fix - proper CSS selector for mobile sidebar */
+    #sidebar-toggle:checked~.main-container .side-bar,
+    #sidebar-toggle:checked+.main-container .side-bar {
         left: 0;
     }
 }
@@ -373,12 +373,12 @@ body.dark-mode .mode-toggle-btn .fas.fa-sun {
     display: block;
 }
 
-#home:target ~ #default,
-#about:target ~ #default,
-#projects:target ~ #default,
-#resume:target ~ #default,
-#certificates:target ~ #default,
-#contact:target ~ #default {
+#home:target~#default,
+#about:target~#default,
+#projects:target~#default,
+#resume:target~#default,
+#certificates:target~#default,
+#contact:target~#default {
     display: none;
 }
 
@@ -1498,7 +1498,7 @@ body.dark-mode .mode-toggle-btn .fas.fa-sun {
 }
 
 /* ========================= */
-/* MOBILE TOGGLE BUTTON */
+/* MOBILE TOGGLE BUTTON - FIXED */
 /* ========================= */
 .mobile-toggle-btn {
     display: none;
@@ -1523,6 +1523,22 @@ body.dark-mode .mode-toggle-btn .fas.fa-sun {
 .mobile-toggle-btn:hover {
     background: var(--btn-hover);
     transform: scale(1.05);
+}
+
+/* Mobile Overlay */
+.mobile-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+#sidebar-toggle:checked~.mobile-overlay {
+    display: block;
 }
 
 @media (max-width: 1024px) {
@@ -1624,6 +1640,7 @@ body.dark-mode .mode-toggle-btn .fas.fa-sun {
         opacity: 0;
         transform: translateX(-30px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
@@ -1635,6 +1652,7 @@ body.dark-mode .mode-toggle-btn .fas.fa-sun {
         opacity: 0;
         transform: translateX(30px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
@@ -1646,6 +1664,7 @@ body.dark-mode .mode-toggle-btn .fas.fa-sun {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -1653,7 +1672,9 @@ body.dark-mode .mode-toggle-btn .fas.fa-sun {
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .timeline-item,

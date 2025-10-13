@@ -40,8 +40,10 @@ function initializePage() {
     // Set initial dark mode state from localStorage
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const isDarkMode = localStorage.getItem('darkMode') === 'true';
-    darkModeToggle.checked = isDarkMode;
-    updateDarkMode(isDarkMode);
+    if (darkModeToggle) {
+        darkModeToggle.checked = isDarkMode;
+        updateDarkMode(isDarkMode);
+    }
 }
 
 // Set up navigation functionality
@@ -62,7 +64,6 @@ function setupNavigation() {
             const sidebarToggle = document.getElementById('sidebar-toggle');
             if (sidebarToggle && sidebarToggle.checked) {
                 sidebarToggle.checked = false;
-                document.body.classList.remove('sidebar-open');
             }
         });
     });
@@ -219,32 +220,20 @@ function setupContactForm() {
 function setupMobileToggle() {
     const sidebarToggle = document.getElementById('sidebar-toggle');
     const mobileToggleBtn = document.querySelector('.mobile-toggle-btn');
+    const mobileOverlay = document.querySelector('.mobile-overlay');
 
     if (sidebarToggle && mobileToggleBtn) {
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', function (e) {
-            if (sidebarToggle.checked &&
-                !e.target.closest('.side-bar') &&
-                !e.target.closest('.mobile-toggle-btn')) {
+        // Close sidebar when clicking on overlay
+        if (mobileOverlay) {
+            mobileOverlay.addEventListener('click', function() {
                 sidebarToggle.checked = false;
-                document.body.classList.remove('sidebar-open');
-            }
-        });
+            });
+        }
 
         // Close sidebar when pressing Escape key
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && sidebarToggle.checked) {
                 sidebarToggle.checked = false;
-                document.body.classList.remove('sidebar-open');
-            }
-        });
-
-        // Handle sidebar toggle changes
-        sidebarToggle.addEventListener('change', function() {
-            if (this.checked) {
-                document.body.classList.add('sidebar-open');
-            } else {
-                document.body.classList.remove('sidebar-open');
             }
         });
     }
