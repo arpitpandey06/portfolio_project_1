@@ -18,15 +18,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Set up smooth scrolling
     setupSmoothScrolling();
-<<<<<<< HEAD
-=======
 
     // Set up intersection observer for animations
     setupAnimations();
 
     // Set up resume animations
     setupResumeAnimations();
->>>>>>> fac400cf518c7483098e2397a36c9d9bc5a72311
 });
 
 // Initialize page state
@@ -43,15 +40,8 @@ function initializePage() {
     // Set initial dark mode state from localStorage
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const isDarkMode = localStorage.getItem('darkMode') === 'true';
-<<<<<<< HEAD
-    if (darkModeToggle) {
-        darkModeToggle.checked = isDarkMode;
-        updateDarkMode(isDarkMode);
-    }
-=======
     darkModeToggle.checked = isDarkMode;
     updateDarkMode(isDarkMode);
->>>>>>> fac400cf518c7483098e2397a36c9d9bc5a72311
 }
 
 // Set up navigation functionality
@@ -69,14 +59,11 @@ function setupNavigation() {
             history.pushState(null, null, `#${targetId}`);
 
             // Close mobile sidebar if open
-<<<<<<< HEAD
-            closeMobileSidebar();
-=======
             const sidebarToggle = document.getElementById('sidebar-toggle');
-            if (sidebarToggle.checked) {
+            if (sidebarToggle && sidebarToggle.checked) {
                 sidebarToggle.checked = false;
+                document.body.classList.remove('sidebar-open');
             }
->>>>>>> fac400cf518c7483098e2397a36c9d9bc5a72311
         });
     });
 
@@ -120,7 +107,6 @@ function activateSection(sectionId) {
 function setupDarkMode() {
     const darkModeToggle = document.getElementById('dark-mode-toggle');
 
-<<<<<<< HEAD
     if (darkModeToggle) {
         darkModeToggle.addEventListener('change', function () {
             const isDarkMode = this.checked;
@@ -128,13 +114,6 @@ function setupDarkMode() {
             localStorage.setItem('darkMode', isDarkMode);
         });
     }
-=======
-    darkModeToggle.addEventListener('change', function () {
-        const isDarkMode = this.checked;
-        updateDarkMode(isDarkMode);
-        localStorage.setItem('darkMode', isDarkMode);
-    });
->>>>>>> fac400cf518c7483098e2397a36c9d9bc5a72311
 }
 
 // Update dark mode state
@@ -236,76 +215,44 @@ function setupContactForm() {
     }
 }
 
-<<<<<<< HEAD
-// Mobile sidebar functionality - SIMPLE VERSION
-function setupMobileToggle() {
-    const mobileToggleBtn = document.querySelector('.mobile-toggle-btn');
-    const navLinks = document.querySelectorAll('.nav-link');
-    const overlay = document.querySelector('.sidebar-overlay');
-
-    // Mobile toggle button click
-    if (mobileToggleBtn) {
-        mobileToggleBtn.addEventListener('click', function (e) {
-            e.stopPropagation();
-            document.body.classList.toggle('sidebar-open');
-        });
-    }
-
-    // Close sidebar when nav link is clicked
-    navLinks.forEach(link => {
-        link.addEventListener('click', function () {
-            closeMobileSidebar();
-        });
-    });
-
-    // Close sidebar when clicking on overlay
-    if (overlay) {
-        overlay.addEventListener('click', function () {
-            closeMobileSidebar();
-        });
-    }
-
-    // Close sidebar when pressing Escape key
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') {
-            closeMobileSidebar();
-=======
 // Set up mobile sidebar toggle
 function setupMobileToggle() {
     const sidebarToggle = document.getElementById('sidebar-toggle');
     const mobileToggleBtn = document.querySelector('.mobile-toggle-btn');
 
-    // Close sidebar when clicking outside on mobile
-    document.addEventListener('click', function (e) {
-        if (sidebarToggle.checked &&
-            !e.target.closest('.side-bar') &&
-            !e.target.closest('.mobile-toggle-btn')) {
-            sidebarToggle.checked = false;
-        }
-    });
+    if (sidebarToggle && mobileToggleBtn) {
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function (e) {
+            if (sidebarToggle.checked &&
+                !e.target.closest('.side-bar') &&
+                !e.target.closest('.mobile-toggle-btn')) {
+                sidebarToggle.checked = false;
+                document.body.classList.remove('sidebar-open');
+            }
+        });
 
-    // Close sidebar when pressing Escape key
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && sidebarToggle.checked) {
-            sidebarToggle.checked = false;
->>>>>>> fac400cf518c7483098e2397a36c9d9bc5a72311
-        }
-    });
+        // Close sidebar when pressing Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && sidebarToggle.checked) {
+                sidebarToggle.checked = false;
+                document.body.classList.remove('sidebar-open');
+            }
+        });
+
+        // Handle sidebar toggle changes
+        sidebarToggle.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('sidebar-open');
+            } else {
+                document.body.classList.remove('sidebar-open');
+            }
+        });
+    }
 }
 
-<<<<<<< HEAD
-// Close mobile sidebar
-function closeMobileSidebar() {
-    document.body.classList.remove('sidebar-open');
-}
-
-// Set up smooth scrolling for anchor links
-function setupSmoothScrolling() {
-=======
 // Set up smooth scrolling for anchor links
 function setupSmoothScrolling() {
     // This is handled by the navigation setup, but we can add additional smooth scrolling if needed
->>>>>>> fac400cf518c7483098e2397a36c9d9bc5a72311
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
@@ -332,9 +279,6 @@ function setupSmoothScrolling() {
             }
         });
     });
-<<<<<<< HEAD
-}
-=======
 }
 
 // Set up animations for elements when they come into view
@@ -458,79 +402,3 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-
-// Add CSS animations for resume
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideInLeft {
-        from {
-            opacity: 0;
-            transform: translateX(-30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    
-    @keyframes slideInRight {
-        from {
-            opacity: 0;
-            transform: translateX(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    .timeline-item,
-    .skill-category,
-    .project-highlight,
-    .achievement-item {
-        opacity: 0;
-    }
-    
-    /* Form Loading State */
-    .submit-btn:disabled {
-        opacity: 0.7;
-        cursor: not-allowed;
-    }
-    
-    .submit-btn.loading {
-        position: relative;
-        color: transparent;
-    }
-    
-    .submit-btn.loading::after {
-        content: '';
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        top: 50%;
-        left: 50%;
-        margin-left: -10px;
-        margin-top: -10px;
-        border: 2px solid #ffffff;
-        border-radius: 50%;
-        border-top-color: transparent;
-        animation: spin 1s ease-in-out infinite;
-    }
-    
-    @keyframes spin {
-        to { transform: rotate(360deg); }
-    }
-`;
-document.head.appendChild(style);
->>>>>>> fac400cf518c7483098e2397a36c9d9bc5a72311
